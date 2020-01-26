@@ -3,7 +3,7 @@ package cscc.edu;
 public class BankView {
     public BankView (){
     }
-    public static Integer MenuMaxNumber = 7;
+    public static Integer MenuMaxNumber = 8;
     public void displayAcct(BankAccount bankAccount){
         System.out.println("==================");
         System.out.println("Name: " + bankAccount.getCustName());
@@ -21,8 +21,9 @@ public class BankView {
         System.out.println("3. Delete account");
         System.out.println("4. Withdraw from account");
         System.out.println("5. Deposit into account");
-        System.out.println("6. Withdraw from account");
-        System.out.println("7. Exit Program");
+        System.out.println("6. Find account by Name");
+        System.out.println("7. Display all accounts (Administrators Only)");
+        System.out.println("8. Exit Program");
         System.out.println("==================");
     }
     public void displayExitScreen() {
@@ -37,5 +38,7 @@ public class BankView {
     public void displayGetAcctWithdraw(){
         System.out.println("Enter the amount you would like to Withdraw: ");
     }
-
+    public void displayDeleteAccount(){
+        System.out.println("Enter the Account Nuber you would like to Delete: ");
+    }
 }

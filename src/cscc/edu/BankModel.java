@@ -7,16 +7,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class BankModel {
     public static final String MY_OBJECTS_TXT = "myObjects.txt";
 
     HashMap<Integer,BankAccount> bankAccounts;
+
+    public Integer getNextAcctId() {
+        return nextAcctId;
+    }
+
+    public void setNextAcctId(Integer nextAcctId) {
+        this.nextAcctId = nextAcctId;
+    }
+
     Integer nextAcctId;
 
     public BankModel() {
-        this.bankAccounts = new HashMap<Integer,BankAccount>();;
+        this.bankAccounts = new HashMap<Integer,BankAccount>();
         this.nextAcctId = 1;
     }
 
@@ -28,7 +38,8 @@ public class BankModel {
         // return new BankModel();
         readAndSerializeBankModel();
         // get size and set nextAcctId to be ready to add new accounts
-        nextAcctId = bankAccounts.size() + 1;
+        Integer maxKey = Collections.max(this.bankAccounts.keySet());
+        nextAcctId = maxKey + 1;
     }
     public String getAcctName (Integer id) {
         BankAccount a = bankAccounts.get(id);
@@ -49,7 +60,7 @@ public class BankModel {
             oos.writeObject(bankAccounts);
             oos.close();
             fos.close();
-            System.out.printf("Serialized HashMap data is saved in: " + MY_OBJECTS_TXT);
+            System.out.println("Serialized HashMap data is saved in: " + MY_OBJECTS_TXT);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {

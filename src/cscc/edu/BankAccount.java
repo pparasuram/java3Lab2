@@ -1,25 +1,31 @@
 package cscc.edu;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 public class BankAccount  implements Serializable {
     Integer accountNumber;
     String custName;
-
-    public double getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
     double accountBalance;
+    public double roundDoubleToTwoDigits(double amount) {
+        return (Math.round(amount * 100.0) / 100.0);
+    }
+    public double getAccountBalance() {
+        return (accountBalance);
+        //
+    }
+    public  String formattedAmount(double amount) {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return (formatter.format(amount));
+    }
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = this.roundDoubleToTwoDigits(accountBalance);
+    }
 
     public BankAccount(Integer accountNumber, String custName, double accountBalance) {
         this.accountNumber = accountNumber;
         this.custName = custName;
-        this.accountBalance = accountBalance;
+        this.accountBalance = this.roundDoubleToTwoDigits(accountBalance);
     }
 
     public String getCustName() {
@@ -43,7 +49,7 @@ public class BankAccount  implements Serializable {
         return "BankAccount{" +
                 "accountNumber=" + accountNumber +
                 ", custName='" + custName + '\'' +
-                ", accountBalance=" + accountBalance +
+                ", accountBalance=" + formattedAmount(accountBalance) +
                 '}';
     }
 }

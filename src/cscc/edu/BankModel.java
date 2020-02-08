@@ -38,8 +38,10 @@ public class BankModel {
         // return new BankModel();
         readAndSerializeBankModel();
         // get size and set nextAcctId to be ready to add new accounts
-        Integer maxKey = Collections.max(this.bankAccounts.keySet());
-        nextAcctId = maxKey + 1;
+        if (!this.bankAccounts.isEmpty()) {
+            Integer maxKey = Collections.max(this.bankAccounts.keySet());
+            nextAcctId = maxKey + 1;
+        }
     }
     public String getAcctName (Integer id) {
         BankAccount a = bankAccounts.get(id);

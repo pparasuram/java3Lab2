@@ -8,7 +8,7 @@ public class BankView {
         System.out.println("===========================================");
         System.out.println("Name: " + bankAccount.getCustName());
         System.out.println("ID: " + bankAccount.getAccountNumber());
-        System.out.println("Balance: " + bankAccount.getAccountBalance());
+        System.out.println("Balance: " + bankAccount.formattedAmount(bankAccount.getAccountBalance()));
         System.out.println("===========================================");
     }
 
@@ -50,7 +50,9 @@ public class BankView {
     }
 
     void displaySuccess(Integer acctNumber, BankAccount bankAccount, BankController bankController) {
-        System.out.println("Successfully updated Account: " + bankAccount + " with amount: " + bankController.bankModel.bankAccounts.get(acctNumber).getAccountBalance());
+        System.out.println("Successfully updated Account: " + bankAccount + " with amount: " +
+                // (bankController.bankModel.bankAccounts.get(acctNumber).getAccountBalance()));
+                bankAccount.formattedAmount(bankController.bankModel.bankAccounts.get(acctNumber).getAccountBalance()));
     }
 
     void displayMessage(String s) {
@@ -58,6 +60,6 @@ public class BankView {
     }
 
     void displayBalanceLow(Double balance) {
-        System.out.println("Sorry, you only have $"+balance+ " in your account going to Menu!");
+        System.out.println("Sorry, you only have $"+(Math.round(balance * 100.0) / 100.0)+ " in your account going to Menu!");
     }
 }

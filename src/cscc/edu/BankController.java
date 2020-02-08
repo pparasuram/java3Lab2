@@ -239,7 +239,10 @@ public class BankController {
     }
     public Integer getValidAccountInput() {
         boolean done = false;
-        Integer maxKey = Collections.max(bankModel.bankAccounts.keySet());
+        Integer maxKey = 1;
+        if (!bankModel.bankAccounts.isEmpty()) {
+            maxKey = Collections.max(bankModel.bankAccounts.keySet());
+        }
         while (!done) {
             if (!input.hasNextInt()){
                 String word = input.next();
